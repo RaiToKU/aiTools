@@ -1,0 +1,1 @@
+package com.szjlc.smt.ai.plugin.common;

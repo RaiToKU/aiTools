@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "aiTools"
+rootProject.name = "smtAiTools"

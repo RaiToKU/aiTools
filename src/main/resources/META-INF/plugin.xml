@@ -1,14 +1,14 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
-    <id>com.szjlc.aiTools</id>
+    <id>com.szjlc.smt.ai.plugin</id>
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
     <name>AiTools</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="support@yourcompany.com" url="https://www.yourcompany.com">YourCompany</vendor>
+    <vendor email="zhongjianzheng@sz-jlc.com" url="https://www.jlc.com/">嘉立创</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
@@ -28,8 +28,42 @@
 
     </extensions>
     <actions>
-        <action id="test_id" class="com.szjlc.smt.ai.TestAction" text="通知" description="测试通知">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
+
+        <group id="AiAssistant" text="嘉立创开发助手" popup="true">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <group id="JunitAssistant" text="测试用例助手" popup="true">
+                <add-to-group group-id="AiAssistant" anchor="first"/>
+            </group>
+            <group id="AuditAssistant" text="代码评审助手" popup="true">
+                <add-to-group group-id="AiAssistant" anchor="after"/>
+            </group>
+            <group id="ToolsAssistant" text="开发助手" popup="true">
+                <add-to-group group-id="AiAssistant" anchor="after"/>
+                <group id="CreateCodeBlock" text="代码片段生成" popup="true">
+                    <add-to-group group-id="ToolsAssistant" anchor="first"/>
+                </group>
+                <group id="CreatePattern" text="正则生成" popup="true">
+                    <add-to-group group-id="ToolsAssistant" anchor="after"/>
+                </group>
+                <group id="RequireAnalyze" text="需求分析" popup="true">
+                    <add-to-group group-id="ToolsAssistant" anchor="after"/>
+                </group>
+                <group id="FunctionAnalyze" text="功能分析" popup="true">
+                    <add-to-group group-id="ToolsAssistant" anchor="after"/>
+                </group>
+                <group id="SQL" text="SQL工具" popup="true">
+                    <add-to-group group-id="ToolsAssistant" anchor="after"/>
+                    <group id="SQLAnalyze" text="SQL分析">
+                        <add-to-group group-id="SQL" anchor="first"/>
+                    </group>
+                    <group id="SQLDesign" text="SQL设计">
+                        <add-to-group group-id="SQL" anchor="after"/>
+                    </group>
+                </group>
+            </group>
+        </group>
+
     </actions>
+
+
 </idea-plugin>
