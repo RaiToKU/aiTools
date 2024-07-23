@@ -1,5 +1,7 @@
 ## IntelliJ IDEA plugin AI开发助手
 
+`阅读之前，可以先参考本文：https://www.cnblogs.com/moutory/p/17752679.html`
+
 #### 环境要求
 IntelliJ IDEA: 2022.1 及以上版本
 Java: 17 或更高版本  
@@ -77,6 +79,8 @@ Gradle JVM 建议设置成JBR
 ##### 4.尽量使用jetbrains runtime 的open jdk 不然会有一些奇怪的问题
 下载地址：https://github.com/JetBrains/JetBrainsRuntime/releases/tag/jbr-release-21.0.3b509.4
 按自己想要的版本，目前我使用17  
+
+gradle build 失败，参照：https://github.com/JetBrains/intellij-platform-gradle-plugin/issues/1469 修改版本号以解决
   
 
 ##### 5.项目问题
