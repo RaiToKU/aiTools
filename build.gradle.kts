@@ -1,6 +1,7 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.13.3"
+    id("org.jetbrains.intellij") version "1.16.0"
+//    id("org.jetbrains.intellij") version "1.13.3"
 }
 
 group = "com.szjlc"
@@ -13,7 +14,12 @@ repositories {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-    localPath.set("D:\\ideaC")
+    // mac 社区版 idea 路径参考：
+    localPath.set("/Applications/IntelliJ IDEA CE.app/Contents")
+//    windows 直接贴 .exe 所在地址
+//    localPath.set("D:\\ideaC")
+
+
 //    plugins = ['java']
 //    version.set("2023.1.3")
 //    type.set("IC") // Target IDE Platform
