@@ -1,7 +1,7 @@
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version "1.16.0"
-//    id("org.jetbrains.intellij") version "1.13.3"
+//    id("org.jetbrains.intellij") version "1.16.0"
+    id("org.jetbrains.intellij") version "1.13.3"
 }
 
 group = "com.szjlc"
@@ -16,7 +16,7 @@ repositories {
 intellij {
     // mac 社区版 idea 路径参考：
     localPath.set("/Applications/IntelliJ IDEA CE.app/Contents")
-//    windows 直接贴 .exe 所在地址
+//    windows 直接贴 .exe 所在地址gang
 //    localPath.set("D:\\ideaC")
 
 

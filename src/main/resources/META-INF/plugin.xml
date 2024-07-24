@@ -63,6 +63,11 @@
             </group>
         </group>
 
+        <action id="com.szjlc.smt.ai.plugin.audit.test.ShowProjNameAction"
+                class="com.szjlc.smt.ai.plugin.audit.test.ShowProjNameAction"
+                text="show project name with popup dialog">
+            <add-to-group group-id="HelpMenu" anchor="after" relative-to-action="About"/>
+        </action>
     </actions>
 
 
