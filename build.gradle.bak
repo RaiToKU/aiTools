@@ -21,29 +21,6 @@ intellij {
 //    plugins.set(listOf(/* Plugin Dependencies */))
 }
 
-dependencies {
-
-    implementation("org.slf4j:slf4j-api:2.0.6")
-    implementation("org.slf4j:slf4j-simple:2.0.6")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.4")
-    implementation("com.squareup.okhttp3:okhttp-sse:3.14.9")
-    implementation("com.squareup.okhttp3:logging-interceptor:3.14.9")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-jackson:2.9.0")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
-    implementation("com.knuddels:jtokkit:0.2.0")
-    compileOnly("org.projectlombok:lombok:1.18.24")
-    implementation("org.apache.commons:commons-lang3:3.9")
-    implementation("com.auth0:java-jwt:4.2.2")
-    implementation("com.google.guava:guava:32.1.2-jre")
-    implementation("com.google.code.gson:gson:2.10.1")
-    implementation("org.java-websocket:Java-WebSocket:1.5.4")
-    implementation("com.squareup.okio:okio:2.10.0")
-    implementation("cn.hutool:hutool-all:5.8.16")
-    testImplementation("junit:junit:4.13.2")
-    implementation("com.alibaba:fastjson:2.0.41")
-
-}
 
 tasks.withType<JavaCompile> {
     options.encoding = "utf-8"
