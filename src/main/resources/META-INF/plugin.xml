@@ -25,7 +25,12 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-
+        <projectConfigurable
+                groupId="tools"
+                displayName="ai助手设置"
+                id="test.id"
+                instance="com.szjlc.smt.ai.plugin.setting.AiSettingFactory"
+        />
     </extensions>
     <actions>
 

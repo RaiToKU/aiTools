@@ -17,7 +17,7 @@ import com.szjlc.smt.ai.sdk.session.Configuration;
 import com.szjlc.smt.ai.sdk.session.DefaultOpenAiSessionFactory;
 import com.szjlc.smt.ai.sdk.session.OpenAiSession;
 import com.szjlc.smt.ai.sdk.session.OpenAiSessionFactory;
-import lombok.extern.slf4j.Slf4j;
+import groovy.util.logging.Slf4j;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.sse.EventSource;
@@ -30,7 +30,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author raito
@@ -40,17 +42,33 @@ import java.util.concurrent.CountDownLatch;
  * @Description TODO
  * @Version 1.0
  */
-@Slf4j
 public class AliYunTest {
 
     private OpenAiSession openAiSession;
 
+    @Before
+    public void test_OpenAiSessionFactory() {
+        AliModelConfig aliModelConfig = new AliModelConfig();
+        aliModelConfig.setApiHost("https://dashscope.aliyuncs.com/");
+        aliModelConfig.setApiKey("sk-eaeb39bb3cd248dcac76824fd56ea301");
+
+        // 2. 配置文件
+        Configuration configuration = new Configuration();
+        configuration.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+        configuration.setAliModelConfig(aliModelConfig);
+
+        // 3. 会话工厂
+        OpenAiSessionFactory factory = new DefaultOpenAiSessionFactory(configuration);
+        // 4. 开启会话
+        this.openAiSession = factory.openSession();
+    }
+
     @Test
-    public void test_OpenAiSessionFactory() throws Exception {
+    public void test_completions() throws Exception {
         // 0. 注意；将 resources 包下的 .env修改为 .env.local 并添加各项配置
 
         AliModelConfig aliModelConfig = new AliModelConfig();
-        aliModelConfig.setApiHost("https://dashscope.aliyuncs.com/compatible-mode/v1");
+        aliModelConfig.setApiHost("https://dashscope.aliyuncs.com/");
         aliModelConfig.setApiKey("sk-eaeb39bb3cd248dcac76824fd56ea301");
 
         // 2. 配置文件
@@ -78,7 +96,7 @@ public class AliYunTest {
             @Override
             public void onEvent(EventSource eventSource, String id,  String type, String data) {
                 if ("[DONE]".equalsIgnoreCase(data)) {
-                    log.info("OpenAI 应答完成");
+                    System.out.println("OpenAI 应答完成");
                     return;
                 }
                 CompletionResponse chatCompletionResponse = JSONUtil.toBean(data, CompletionResponse.class);
@@ -93,24 +111,40 @@ public class AliYunTest {
                         return;
                     }
 
-                    log.info("测试结果：{}", delta.getContent());
+                    System.out.println("测试结果：" + delta.getContent());
                 }
             }
 
             @Override
             public void onClosed(EventSource eventSource) {
-                log.info("对话完成");
+                System.out.println("对话完成");;
                 countDownLatch.countDown();
             }
 
             @Override
             public void onFailure(EventSource eventSource, Throwable t, Response response) {
-                log.info("对话异常");
+                System.out.println("对话异常");;
                 countDownLatch.countDown();
             }
         });
 
         countDownLatch.await();
+    }
+
+    @Test
+    public void test_completions_future() throws Exception {
+        // 1. 创建参数
+        CompletionRequest request = CompletionRequest.builder()
+                .stream(true)
+                .messages(Collections.singletonList(Message.builder().role(CompletionRequest.Role.USER).content("1+1").build()))
+                .model(CompletionRequest.Model.QWEN_MAX.getCode())
+                .build();
+
+        // 2. 同步响应
+        CompletableFuture<String> future   = openAiSession.completions(request);
+        String                    response = future.get(500, TimeUnit.SECONDS);
+        System.out.println("测试结果：" + response);
+
     }
 
 
