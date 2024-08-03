@@ -13,8 +13,8 @@ repositories {
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
-//    localPath.set("D:\\ideaC")
-    localPath.set("/Applications/IntelliJ IDEA CE.app/Contents")
+    localPath.set("D:\\ideaC")
+//    localPath.set("/Applications/IntelliJ IDEA CE.app/Contents")
 //    plugins = ['java']
 //    version.set("2023.1.3")
 //    type.set("IC") // Target IDE Platform
